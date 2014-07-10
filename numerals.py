@@ -32,10 +32,28 @@ class romannumeral:
             ret = ret.increment()
             numtoadd = numtoadd.decrement()
         return ret
+    
+    def __sub__(self, numtosub):
+        ret = romannumeral(self.val)
+        while numtosub.val != "N":
+            ret = ret.decrement()
+            numtosub = numtosub.decrement()
+            if ret.val == "N":
+                raise Overflow("No negative numbers")
+
+                
+
+        return ret
+
 
     def __str__(self):
         return self.val
 
+class Overflow(Exception):
+    def __init__(self, value):
+        self.value = value
+    def __str__(self):
+        return repr(self.value)
 
 v = romannumeral("X")
 for i in range(5):
@@ -43,4 +61,11 @@ for i in range(5):
     print v
 
 foo = romannumeral("V") + romannumeral("IV")
+print foo
+foo = romannumeral("V") - romannumeral("IV")
+print foo
+try:
+    foo = romannumeral("V") - romannumeral("VI")
+except Overflow:
+    print "No negative numbers"
 print foo

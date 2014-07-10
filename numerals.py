@@ -1,14 +1,19 @@
-replace_table = {
-    "NI": "I",
-    "IIII": "IV",
-    "IVI": "V",
-    "VIV": "IX",
-    "IXI": "X",
-    "XXXX": "XL",
-    "XLX": "L",
-    "LL": "XC",
-    "XCX": "C",
-}
+from collections import OrderedDict
+replace_table = OrderedDict((
+    ("NI", "I"),
+    ("IIII", "IV"),
+    ("IVI", "V"),
+    ("VIV", "IX"),
+    ("IXI", "X"),
+    ("XXXX", "XL"),
+    ("XLX", "L"),
+    ("LL", "XC"),
+    ("XCX", "C"),
+    ("CCCC", "CD"),
+    ("CDC", "D"),
+    ("DCD", "CM"),
+    ("CMC", "M"),
+))
 
 class romannumeral:
     def __init__(self, val):
@@ -18,7 +23,6 @@ class romannumeral:
         newval = self.val + "I"
         for rep, wi in replace_table.items():
             newval = newval.replace(rep, wi)
-            print newval
         return romannumeral(newval)
 
     def decrement(self):
@@ -103,24 +107,20 @@ class Overflow(Exception):
 N = romannumeral("N")
 I = romannumeral("I")
 
-# counter = N
-# while counter < romannumeral("D"):
-#     counter += I
-#     globals()[counter.val] = counter
-#     print counter
+counter = N
+while counter.val != "MMMCMXCIX":
+    counter += I
+    globals()[counter.val] = counter
 
 _range = range
 
-# def range(low, high):
-#     counter = romannumeral(low.val)
-#     while counter < high:
-#         yield counter
-#         counter += I
+def range(low, high):
+    counter = romannumeral(low.val)
+    while counter < high:
+        yield counter
+        counter += I
 
 
 
 
-
-
-r = romannumeral("CCCXCIX")
-print r.increment()
+print XI + XX

@@ -59,5 +59,12 @@ class romannumeral:
     def __le__(self, other):
         return not other<self
 
+    def __mul__(self, other):
+        newnum = romannumeral(self.val)
+        counter = romannumeral("N")
+        while counter < other:
+            newnum += self
+        return newnum
 
-print romannumeral("I") < romannumeral("I")
+
+print romannumeral("I") * romannumeral("II")

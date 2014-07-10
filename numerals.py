@@ -116,20 +116,6 @@ class Overflow(Exception):
     def __str__(self):
         return repr(self.value)
 
-foo = romannumeral("V") + romannumeral("IV")
-print foo
-foo = romannumeral("V") - romannumeral("IV")
-print foo
-try:
-    foo = romannumeral("V") - romannumeral("VI")
-except Overflow:
-    print "No negative numbers " + str(foo)
-
-print romannumeral("II") * romannumeral("II")
-print romannumeral("X") / romannumeral("III")
-print romannumeral("X") / romannumeral("II")
-print romannumeral("X") % romannumeral("III")
-print romannumeral("X") % romannumeral("II")
 N = romannumeral("N")
 I = romannumeral("I")
 

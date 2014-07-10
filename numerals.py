@@ -4,6 +4,10 @@ replace_table = {
     "IVI": "V",
     "VIV": "IX",
     "IXI": "X",
+    "XXXX": "XL",
+    "XLX": "L",
+    "LL": "XC",
+    "XCX": "C",
 }
 
 class romannumeral:
@@ -14,6 +18,7 @@ class romannumeral:
         newval = self.val + "I"
         for rep, wi in replace_table.items():
             newval = newval.replace(rep, wi)
+            print newval
         return romannumeral(newval)
 
     def decrement(self):
@@ -67,5 +72,27 @@ class romannumeral:
             counter += romannumeral("I")
         return newnum
 
+N = romannumeral("N")
+I = romannumeral("I")
 
-print romannumeral("I") * romannumeral("II")
+# counter = N
+# while counter < romannumeral("D"):
+#     counter += I
+#     globals()[counter.val] = counter
+#     print counter
+
+_range = range
+
+# def range(low, high):
+#     counter = romannumeral(low.val)
+#     while counter < high:
+#         yield counter
+#         counter += I
+
+
+
+
+
+
+r = romannumeral("CCCXCIX")
+print r.increment()

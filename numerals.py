@@ -80,6 +80,15 @@ class romannumeral:
             counter += romannumeral("I")
         return newnum
 
+    def __div__(self, other):
+        newnum = romannumeral("N")
+        counter = romannumeral("N")
+        while newnum < self:
+            newnum += other
+            counter += romannumeral("I")
+        if newnum != self:
+            return counter - romannumeral("I")
+        return counter
 
 class Overflow(Exception):
     def __init__(self, value):
@@ -97,3 +106,5 @@ except Overflow:
     print "No negative numbers " + str(foo)
 
 print romannumeral("II") * romannumeral("II")
+print romannumeral("X") / romannumeral("III")
+print romannumeral("X") / romannumeral("II")

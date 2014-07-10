@@ -49,16 +49,43 @@ class romannumeral:
     def __str__(self):
         return self.val
 
+    def __lt__(self, other):
+        if self == other:
+            return False
+        n1 = romannumeral("N")
+        n2 = romannumeral("N")
+        while (n1.val != self.val and n2.val != other.val):
+            n1 = n1.increment()
+            n2 = n2.increment()
+        if n1.val == self.val:
+            return True
+        return False
+
+    def __eq__(self, other):
+        return self.val == other.val
+    def __ne__(self, other):
+        return self<other or other<self
+    def __gt__(self, other):
+        return other<self
+    def __ge__(self, other):
+        return not self<other
+    def __le__(self, other):
+        return not other<self
+
+    def __mul__(self, other):
+        newnum = romannumeral("N")
+        counter = romannumeral("N")
+        while counter < other:
+            newnum += self
+            counter += romannumeral("I")
+        return newnum
+
+
 class Overflow(Exception):
     def __init__(self, value):
         self.value = value
     def __str__(self):
         return repr(self.value)
-
-v = romannumeral("X")
-for i in range(5):
-    v = v.decrement()
-    print v
 
 foo = romannumeral("V") + romannumeral("IV")
 print foo
@@ -67,5 +94,6 @@ print foo
 try:
     foo = romannumeral("V") - romannumeral("VI")
 except Overflow:
-    print "No negative numbers"
-print foo
+    print "No negative numbers " + str(foo)
+
+print romannumeral("II") * romannumeral("II")

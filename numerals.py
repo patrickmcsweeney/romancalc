@@ -36,11 +36,28 @@ class romannumeral:
     def __str__(self):
         return self.val
 
+    def __lt__(self, other):
+        if self == other:
+            return False
+        n1 = romannumeral("N")
+        n2 = romannumeral("N")
+        while (n1.val != self.val and n2.val != other.val):
+            n1 = n1.increment()
+            n2 = n2.increment()
+        if n1.val == self.val:
+            return True
+        return False
 
-v = romannumeral("X")
-for i in range(5):
-    v = v.decrement()
-    print v
+    def __eq__(self, other):
+        return self.val == other.val
+    def __ne__(self, other):
+        return self<other or other<self
+    def __gt__(self, other):
+        return other<self
+    def __ge__(self, other):
+        return not self<other
+    def __le__(self, other):
+        return not other<self
 
-foo = romannumeral("V") + romannumeral("IV")
-print foo
+
+print romannumeral("I") < romannumeral("I")

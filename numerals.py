@@ -60,10 +60,11 @@ class romannumeral:
         return not other<self
 
     def __mul__(self, other):
-        newnum = romannumeral(self.val)
+        newnum = romannumeral("N")
         counter = romannumeral("N")
         while counter < other:
             newnum += self
+            counter += romannumeral("I")
         return newnum
 
 

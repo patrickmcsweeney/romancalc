@@ -37,6 +37,19 @@ class romannumeral:
             ret = ret.increment()
             numtoadd = numtoadd.decrement()
         return ret
+    
+    def __sub__(self, numtosub):
+        ret = romannumeral(self.val)
+        while numtosub.val != "N":
+            ret = ret.decrement()
+            numtosub = numtosub.decrement()
+            if ret.val == "N":
+                raise Overflow("No negative numbers")
+
+                
+
+        return ret
+
 
     def __str__(self):
         return self.val
@@ -71,6 +84,21 @@ class romannumeral:
             newnum += self
             counter += romannumeral("I")
         return newnum
+    def __div__(self, other):
+        newnum = romannumeral("N")
+        counter = romannumeral("N")
+        while newnum < self:
+            newnum += other
+            counter += romannumeral("I")
+        if newnum != self:
+            return counter - romannumeral("I")
+        return counter
+
+class Overflow(Exception):
+    def __init__(self, value):
+        self.value = value
+    def __str__(self):
+        return repr(self.value)
 
 N = romannumeral("N")
 I = romannumeral("I")
